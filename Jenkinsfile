@@ -62,7 +62,7 @@ pipeline {
   
     stage('Scan') {
         agent {
-          docker { image 'node:7-alpine' }
+          docker { image 'ibmcase/docker:18.09-dind' }
         }
         steps{
             aquaMicroscanner imageName: 'mapit-dev', notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
