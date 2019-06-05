@@ -42,6 +42,7 @@ pipeline {
         }
       }
     }
+
     stage('Create DEV') {
       when {
         expression {
@@ -58,7 +59,11 @@ pipeline {
         }
       }
     }
-    
+  }
+  agent {
+        docker { image 'node:7-alpine' }
+  }
+  stages {
     stage('Scan') {
         steps{
             aquaMicroscanner imageName: 'mapit-dev', notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
