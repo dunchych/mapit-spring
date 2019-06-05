@@ -59,12 +59,11 @@ pipeline {
         }
       }
     }
-  }
-  agent {
-        docker { image 'node:7-alpine' }
-  }
-  stages {
+  
     stage('Scan') {
+        agent {
+          docker { image 'node:7-alpine' }
+        }
         steps{
             aquaMicroscanner imageName: 'mapit-dev', notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
          }
