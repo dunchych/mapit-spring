@@ -3,26 +3,26 @@ pipeline{
     stages{
         stage('Checkout') {
             steps{
-                git branch: 'master', url: 'https://github.com/dunchych/mapit-spring.git'
+                git branch: 'microscanner-jenkinsci', url: 'https://gitlab.com/aboullaite/Jib-Springboot.git'
 
             }
         }
 
     stage('Build') {
         steps{
-            sh 'mvn clean package'
+            sh 'mvn clean package -DskipTests'
          }
     }
 
     stage('Package') {
         steps{
-            docker.build("mapit/mapit-dev")
+            docker.build("aboullaite/sb-app")
          }
     }
 
     stage('Scan') {
         steps{
-            aquaMicroscanner imageName: 'mapit/mapit-dev', notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
+            aquaMicroscanner imageName: 'aboullaite/sb-app', notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
          }
     }
 }
