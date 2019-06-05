@@ -61,7 +61,7 @@ pipeline {
     
     stage('Scan') {
         steps{
-            aquaMicroscanner imageName: 'docker-registry.default.svc:5000/mapit/mapit-dev', notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
+            aquaMicroscanner imageName: 'mapit-dev', notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
          }
     }
 
